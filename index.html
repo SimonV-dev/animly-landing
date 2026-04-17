@@ -33,1020 +33,236 @@
             --radius-lg: 20px;
             --radius-xl: 28px;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-primary); background: var(--cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, .display { font-family: 'DM Serif Display', serif; }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); }
 
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
+        /* NAV */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        nav.scrolled { background: rgba(250,246,240,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: var(--shadow-sm); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--green-deep); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-icon { width: 36px; height: 36px; background: var(--green-deep); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--cream); font-size: 1.1rem; transition: transform 0.3s ease; }
+        .logo:hover .logo-icon { transform: rotate(-8deg) scale(1.05); }
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text-primary);
-            background: var(--cream);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+        /* TOGGLE */
+        .mode-toggle { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; user-select: none; }
+        .mode-label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); transition: color 0.3s; }
+        .mode-label.active { color: var(--green-deep); }
+        .toggle-track { width: 44px; height: 24px; background: var(--coral); border-radius: 100px; position: relative; transition: background 0.3s; flex-shrink: 0; }
+        .toggle-track.is-pro { background: var(--green-deep); }
+        .toggle-thumb { width: 20px; height: 20px; background: var(--white); border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: var(--shadow-sm); }
+        .toggle-track.is-pro .toggle-thumb { transform: translateX(20px); }
 
-        h1, h2, h3, .display {
-            font-family: 'DM Serif Display', serif;
-        }
-
-        /* =========== GRAIN OVERLAY =========== */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.025;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-        }
-
-        /* =========== NAV =========== */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 2rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        nav.scrolled {
-            background: rgba(250, 246, 240, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.6rem;
-            color: var(--green-deep);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--green-deep);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--cream);
-            font-size: 1.1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover .logo-icon {
-            transform: rotate(-8deg) scale(1.05);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-            letter-spacing: 0.01em;
-        }
-
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
         .nav-links a:hover { color: var(--green-deep); }
-
-        .nav-cta {
-            background: var(--green-deep) !important;
-            color: var(--cream) !important;
-            padding: 0.6rem 1.4rem;
-            border-radius: 100px;
-            font-weight: 600 !important;
-            transition: all 0.3s ease !important;
-        }
-
-        .nav-cta:hover {
-            background: var(--green-mid) !important;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 32px;
-            height: 32px;
-            position: relative;
-        }
-
-        .mobile-toggle span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--green-deep);
-            position: absolute;
-            left: 5px;
-            transition: all 0.3s;
-        }
-
+        .nav-cta { background: var(--green-deep) !important; color: var(--cream) !important; padding: 0.6rem 1.4rem; border-radius: 100px; font-weight: 600 !important; transition: all 0.3s ease !important; }
+        .nav-cta:hover { background: var(--green-mid) !important; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .mobile-toggle { display: none; background: none; border: none; cursor: pointer; width: 32px; height: 32px; position: relative; }
+        .mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--green-deep); position: absolute; left: 5px; transition: all 0.3s; }
         .mobile-toggle span:nth-child(1) { top: 9px; }
         .mobile-toggle span:nth-child(2) { top: 15px; }
         .mobile-toggle span:nth-child(3) { top: 21px; }
 
-        /* =========== HERO =========== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 8rem 2rem 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: -20%;
-            right: -15%;
-            width: 70vw;
-            height: 70vw;
-            max-width: 900px;
-            max-height: 900px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, var(--green-pale), transparent 70%);
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        .hero-bg-2 {
-            position: absolute;
-            bottom: -10%;
-            left: -10%;
-            width: 40vw;
-            height: 40vw;
-            max-width: 500px;
-            max-height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--coral-light), transparent 70%);
-            opacity: 0.15;
-            pointer-events: none;
-        }
-
-        .hero-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--white);
-            border: 1px solid var(--green-pale);
-            padding: 0.4rem 1rem;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--green-mid);
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .hero-badge-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--coral);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.5); }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
-            line-height: 1.1;
-            color: var(--green-deep);
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .hero h1 em {
-            color: var(--coral);
-            font-style: italic;
-        }
-
-        .hero-sub {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 2.5rem;
-            max-width: 480px;
-            font-weight: 300;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--coral);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 16px rgba(232, 120, 90, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: var(--coral-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(232, 120, 90, 0.4);
-        }
-
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: transparent;
-            color: var(--green-deep);
-            padding: 1rem 2rem;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            border: 2px solid var(--green-deep);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: var(--green-deep);
-            color: var(--cream);
-        }
-
-        /* Hero Visual */
-        .hero-visual {
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
-
-        .hero-card {
-            background: var(--white);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-xl);
-            padding: 2rem;
-            width: 100%;
-            max-width: 440px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--green-light), var(--coral));
-        }
-
-        .hero-card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-card-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.1rem;
-            color: var(--green-deep);
-        }
-
-        .hero-card-date {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-        }
-
-        .appointment-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .appointment-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.9rem 1rem;
-            background: var(--cream);
-            border-radius: var(--radius-md);
-            transition: all 0.3s ease;
-        }
-
-        .appointment-item:hover {
-            transform: translateX(4px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .appt-time {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--green-deep);
-            min-width: 48px;
-        }
-
-        .appt-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .appt-info h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .appt-info p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .appt-status {
-            margin-left: auto;
-            font-size: 0.7rem;
-            padding: 0.25rem 0.6rem;
-            border-radius: 100px;
-            font-weight: 600;
-        }
-
-        .status-confirmed {
-            background: #e0f5e8;
-            color: #2d7a4a;
-        }
-
-        .status-pending {
-            background: #fff3e0;
-            color: #c77b1a;
-        }
-
-        /* Floating elements */
-        .float-notif {
-            position: absolute;
-            top: -12px;
-            right: -16px;
-            background: var(--white);
-            border-radius: var(--radius-md);
-            padding: 0.7rem 1rem;
-            box-shadow: var(--shadow-lg);
-            font-size: 0.78rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            animation: floatUp 3s ease-in-out infinite;
-            z-index: 2;
-        }
-
-        .float-revenue {
-            position: absolute;
-            bottom: -16px;
-            left: -20px;
-            background: var(--green-deep);
-            color: var(--cream);
-            border-radius: var(--radius-md);
-            padding: 0.8rem 1.2rem;
-            box-shadow: var(--shadow-lg);
-            font-size: 0.82rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            animation: floatUp 3s ease-in-out infinite 1.5s;
-            z-index: 2;
-        }
-
-        @keyframes floatUp {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* =========== TRUST BAR =========== */
-        .trust-bar {
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .trust-bar p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .trust-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            opacity: 0.5;
-        }
-
-        .trust-logos span {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-        }
-
-        /* =========== PROBLEM SECTION =========== */
-        .problem {
-            padding: 6rem 2rem;
-            background: var(--white);
-        }
-
-        .section-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--coral);
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-            color: var(--green-deep);
-            line-height: 1.15;
-            margin-bottom: 1rem;
-            max-width: 600px;
-        }
-
-        .section-sub {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            max-width: 550px;
-            line-height: 1.7;
-            margin-bottom: 3rem;
-            font-weight: 300;
-        }
-
-        .pain-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .pain-card {
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--cream-dark);
-            background: var(--cream);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pain-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--coral);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .pain-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .pain-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .pain-icon {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .pain-card h3 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--green-deep);
-            margin-bottom: 0.5rem;
-        }
-
-        .pain-card p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* =========== FEATURES =========== */
-        .features {
-            padding: 6rem 2rem;
-        }
-
-        .features .section-inner {
-            text-align: center;
-        }
-
-        .features .section-title {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .features .section-sub {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .feature-card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 2.2rem 1.8rem;
-            text-align: left;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 58, 42, 0.05);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .feature-icon-wrap {
-            width: 52px;
-            height: 52px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .fi-green { background: var(--green-pale); }
-        .fi-coral { background: #fde8e0; }
-        .fi-cream { background: var(--cream-dark); }
-
-        .feature-card h3 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--green-deep);
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-card p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* =========== PRICING =========== */
-        .pricing {
-            padding: 6rem 2rem;
-            background: var(--green-deep);
-            color: var(--cream);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 60vw;
-            height: 60vw;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(74, 140, 106, 0.2), transparent 70%);
-            pointer-events: none;
-        }
-
-        .pricing .section-inner {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
+        /* MODE SWITCH */
+        .page-mode { display: none; }
+        .page-mode.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* SHARED */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 2rem 4rem; position: relative; overflow: hidden; }
+        .hero-bg { position: absolute; top: -20%; right: -15%; width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, var(--green-pale), transparent 70%); opacity: 0.7; pointer-events: none; }
+        .hero-bg-2 { position: absolute; bottom: -10%; left: -10%; width: 40vw; height: 40vw; max-width: 500px; max-height: 500px; border-radius: 50%; background: radial-gradient(circle, var(--coral-light), transparent 70%); opacity: 0.15; pointer-events: none; }
+        .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--white); border: 1px solid var(--green-pale); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: var(--green-mid); margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }
+        .hero-badge-dot { width: 6px; height: 6px; background: var(--coral); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.5); } }
+        .hero h1 { font-size: clamp(2.4rem,5vw,3.8rem); line-height: 1.1; color: var(--green-deep); margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+        .hero h1 em { color: var(--coral); font-style: italic; }
+        .hero-sub { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2.5rem; max-width: 480px; font-weight: 300; }
+        .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: var(--white); padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 4px 16px rgba(232,120,90,0.3); }
+        .btn-primary:hover { background: var(--coral-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,120,90,0.4); }
+        .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--green-deep); padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 1rem; border: 2px solid var(--green-deep); cursor: pointer; transition: all 0.3s ease; }
+        .btn-secondary:hover { background: var(--green-deep); color: var(--cream); }
+        .section-inner { max-width: 1100px; margin: 0 auto; }
+        .section-label { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); margin-bottom: 1rem; }
+        .section-title { font-size: clamp(1.8rem,3.5vw,2.6rem); color: var(--green-deep); line-height: 1.15; margin-bottom: 1rem; max-width: 600px; }
+        .section-sub { font-size: 1.05rem; color: var(--text-secondary); max-width: 550px; line-height: 1.7; margin-bottom: 3rem; font-weight: 300; }
+
+        /* HERO CARD */
+        .hero-visual { position: relative; display: flex; justify-content: center; }
+        .hero-card { background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); padding: 2rem; width: 100%; max-width: 440px; position: relative; overflow: hidden; }
+        .hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--green-light), var(--coral)); }
+        .hero-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+        .hero-card-title { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--green-deep); }
+        .hero-card-date { font-size: 0.78rem; color: var(--text-muted); }
+        .appointment-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .appointment-item { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1rem; background: var(--cream); border-radius: var(--radius-md); transition: all 0.3s ease; }
+        .appointment-item:hover { transform: translateX(4px); box-shadow: var(--shadow-sm); }
+        .appt-time { font-size: 0.78rem; font-weight: 700; color: var(--green-deep); min-width: 48px; }
+        .appt-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+        .appt-info h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 600; }
+        .appt-info p { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+        .appt-status { margin-left: auto; font-size: 0.7rem; padding: 0.25rem 0.6rem; border-radius: 100px; font-weight: 600; }
+        .status-confirmed { background: #e0f5e8; color: #2d7a4a; }
+        .status-pending { background: #fff3e0; color: #c77b1a; }
+        .float-notif { position: absolute; top: -12px; right: -16px; background: var(--white); border-radius: var(--radius-md); padding: 0.7rem 1rem; box-shadow: var(--shadow-lg); font-size: 0.78rem; display: flex; align-items: center; gap: 0.5rem; animation: floatUp 3s ease-in-out infinite; z-index: 2; }
+        .float-revenue { position: absolute; bottom: -16px; left: -20px; background: var(--green-deep); color: var(--cream); border-radius: var(--radius-md); padding: 0.8rem 1.2rem; box-shadow: var(--shadow-lg); font-size: 0.82rem; display: flex; align-items: center; gap: 0.5rem; animation: floatUp 3s ease-in-out infinite 1.5s; z-index: 2; }
+        @keyframes floatUp { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        /* TRUST */
+        .trust-bar { padding: 3rem 2rem; text-align: center; }
+        .trust-bar p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
+        .trust-logos { display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; opacity: 0.5; }
+        .trust-logos span { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--text-secondary); }
+
+        /* PROBLEM */
+        .problem { padding: 6rem 2rem; background: var(--white); }
+        .pain-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+        .pain-card { padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--cream-dark); background: var(--cream); transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .pain-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--coral); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+        .pain-card:hover::before { transform: scaleX(1); }
+        .pain-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .pain-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+        .pain-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
+        .pain-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* FEATURES */
+        .features { padding: 6rem 2rem; }
+        .features .section-inner { text-align: center; }
+        .features .section-title, .features .section-sub { margin-left: auto; margin-right: auto; }
+        .feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 1rem; }
+        .feature-card { background: var(--white); border-radius: var(--radius-lg); padding: 2.2rem 1.8rem; text-align: left; box-shadow: var(--shadow-sm); border: 1px solid rgba(26,58,42,0.05); transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .feature-icon-wrap { width: 52px; height: 52px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.2rem; }
+        .fi-green { background: var(--green-pale); } .fi-coral { background: #fde8e0; } .fi-cream { background: var(--cream-dark); }
+        .feature-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
+        .feature-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* PRICING */
+        .pricing { padding: 6rem 2rem; background: var(--green-deep); color: var(--cream); position: relative; overflow: hidden; }
+        .pricing::before { content: ''; position: absolute; top: -50%; right: -20%; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(circle, rgba(74,140,106,0.2), transparent 70%); pointer-events: none; }
+        .pricing .section-inner { text-align: center; position: relative; z-index: 1; }
         .pricing .section-label { color: var(--coral-light); }
         .pricing .section-title { color: var(--cream); margin-left: auto; margin-right: auto; }
-        .pricing .section-sub { color: rgba(250, 246, 240, 0.65); margin-left: auto; margin-right: auto; }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .price-card {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem 2rem;
-            text-align: left;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            position: relative;
-        }
-
-        .price-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(255,255,255,0.2);
-        }
-
-        .price-card.featured {
-            background: var(--white);
-            color: var(--text-primary);
-            border-color: transparent;
-            box-shadow: var(--shadow-xl);
-            transform: scale(1.03);
-        }
-
-        .price-card.featured:hover {
-            transform: scale(1.03) translateY(-6px);
-        }
-
-        .price-badge {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: var(--coral);
-            color: var(--white);
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 0.3rem 0.9rem;
-            border-radius: 100px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .price-name {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.8rem;
-            opacity: 0.7;
-        }
-
-        .price-card.featured .price-name {
-            color: var(--coral);
-            opacity: 1;
-        }
-
-        .price-amount {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.8rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .price-amount span {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 400;
-            opacity: 0.6;
-        }
-
-        .price-desc {
-            font-size: 0.85rem;
-            opacity: 0.6;
-            margin-bottom: 2rem;
-            line-height: 1.5;
-        }
-
+        .pricing .section-sub { color: rgba(250,246,240,0.65); margin-left: auto; margin-right: auto; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 960px; margin: 0 auto; }
+        .price-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-lg); padding: 2.5rem 2rem; text-align: left; transition: all 0.4s ease; backdrop-filter: blur(10px); position: relative; }
+        .price-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.2); }
+        .price-card.featured { background: var(--white); color: var(--text-primary); border-color: transparent; box-shadow: var(--shadow-xl); transform: scale(1.03); }
+        .price-card.featured:hover { transform: scale(1.03) translateY(-6px); }
+        .price-badge { position: absolute; top: -12px; right: 20px; background: var(--coral); color: var(--white); font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.9rem; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .price-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.8rem; opacity: 0.7; }
+        .price-card.featured .price-name { color: var(--coral); opacity: 1; }
+        .price-amount { font-family: 'DM Serif Display', serif; font-size: 2.8rem; margin-bottom: 0.3rem; }
+        .price-amount span { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 400; opacity: 0.6; }
+        .price-desc { font-size: 0.85rem; opacity: 0.6; margin-bottom: 2rem; line-height: 1.5; }
         .price-card.featured .price-desc { color: var(--text-secondary); }
+        .price-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
+        .price-features li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.85rem; line-height: 1.5; }
+        .price-features li::before { content: '✓'; color: var(--coral-light); font-weight: 700; flex-shrink: 0; }
+        .price-card.featured .price-features li::before { color: var(--coral); }
+        .price-card.featured .price-features li { color: var(--text-secondary); }
+        .btn-price { display: block; width: 100%; text-align: center; padding: 0.9rem; border-radius: 100px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; }
+        .btn-price-outline { border: 2px solid rgba(255,255,255,0.3); color: var(--cream); background: transparent; }
+        .btn-price-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
+        .btn-price-filled { background: var(--coral); color: var(--white); border: 2px solid var(--coral); }
+        .btn-price-filled:hover { background: var(--coral-dark); border-color: var(--coral-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,120,90,0.4); }
 
-        .price-features {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-            margin-bottom: 2rem;
-        }
+        /* CTA */
+        .cta-section { padding: 6rem 2rem; }
+        .cta-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+        .cta-inner .section-title, .cta-inner .section-sub { margin-left: auto; margin-right: auto; }
+        .cta-form { display: flex; gap: 0.75rem; margin-top: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .cta-form input[type="email"] { flex: 1; padding: 1rem 1.4rem; border: 2px solid var(--cream-dark); border-radius: 100px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; background: var(--white); color: var(--text-primary); outline: none; transition: border-color 0.3s; }
+        .cta-form input[type="email"]:focus { border-color: var(--green-light); }
+        .cta-form input::placeholder { color: var(--text-muted); }
+        .cta-form button { flex-shrink: 0; }
+        .cta-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 1rem; }
+        .cta-success { display: none; padding: 1.5rem; background: var(--green-pale); border-radius: var(--radius-md); color: var(--green-deep); font-weight: 500; margin-top: 1.5rem; }
 
-        .price-features li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        .price-features li::before {
-            content: '✓';
-            color: var(--coral-light);
-            font-weight: 700;
-            flex-shrink: 0;
-            margin-top: 1px;
-        }
-
-        .price-card.featured .price-features li::before {
-            color: var(--coral);
-        }
-
-        .price-card.featured .price-features li {
-            color: var(--text-secondary);
-        }
-
-        .btn-price {
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 0.9rem;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .btn-price-outline {
-            border: 2px solid rgba(255,255,255,0.3);
-            color: var(--cream);
-            background: transparent;
-        }
-
-        .btn-price-outline:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.5);
-        }
-
-        .btn-price-filled {
-            background: var(--coral);
-            color: var(--white);
-            border: 2px solid var(--coral);
-        }
-
-        .btn-price-filled:hover {
-            background: var(--coral-dark);
-            border-color: var(--coral-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(232, 120, 90, 0.4);
-        }
-
-        /* =========== CTA / FORM =========== */
-        .cta-section {
-            padding: 6rem 2rem;
-            position: relative;
-        }
-
-        .cta-inner {
-            max-width: 640px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .cta-inner .section-title {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-inner .section-sub {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-form {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 2rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-form input {
-            flex: 1;
-            padding: 1rem 1.4rem;
-            border: 2px solid var(--cream-dark);
-            border-radius: 100px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95rem;
-            background: var(--white);
-            color: var(--text-primary);
-            transition: border-color 0.3s ease;
-            outline: none;
-        }
-
-        .cta-form input:focus {
-            border-color: var(--green-light);
-        }
-
-        .cta-form input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .cta-form button {
-            flex-shrink: 0;
-        }
-
-        .cta-note {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            margin-top: 1rem;
-        }
-
-        .cta-success {
-            display: none;
-            padding: 1.5rem;
-            background: var(--green-pale);
-            border-radius: var(--radius-md);
-            color: var(--green-deep);
-            font-weight: 500;
-            margin-top: 1.5rem;
-        }
-
-        /* =========== FOOTER =========== */
-        footer {
-            background: var(--green-deep);
-            color: rgba(250, 246, 240, 0.6);
-            padding: 4rem 2rem 2rem;
-        }
-
-        .footer-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .footer-brand .logo {
-            color: var(--cream);
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-brand .logo-icon {
-            background: rgba(255,255,255,0.15);
-        }
-
-        .footer-brand p {
-            font-size: 0.85rem;
-            max-width: 280px;
-            line-height: 1.6;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 4rem;
-        }
-
-        .footer-col h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--cream);
-            margin-bottom: 1rem;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .footer-col a {
-            text-decoration: none;
-            color: rgba(250, 246, 240, 0.5);
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-
+        /* FOOTER */
+        footer { background: var(--green-deep); color: rgba(250,246,240,0.6); padding: 4rem 2rem 2rem; }
+        .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
+        .footer-brand .logo { color: var(--cream); margin-bottom: 0.8rem; }
+        .footer-brand .logo-icon { background: rgba(255,255,255,0.15); }
+        .footer-brand p { font-size: 0.85rem; max-width: 280px; line-height: 1.6; }
+        .footer-links { display: flex; gap: 4rem; }
+        .footer-col h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+        .footer-col a { text-decoration: none; color: rgba(250,246,240,0.5); font-size: 0.85rem; transition: color 0.2s; }
         .footer-col a:hover { color: var(--cream); }
+        .footer-bottom { max-width: 1100px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; }
 
-        .footer-bottom {
-            max-width: 1100px;
-            margin: 3rem auto 0;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.78rem;
-        }
+        /* PARTICULIER — SEARCH */
+        .search-bar-wrap { max-width: 600px; margin-bottom: 2.5rem; }
+        .search-bar { display: flex; gap: 0.5rem; background: var(--white); border-radius: 100px; padding: 0.4rem; box-shadow: var(--shadow-lg); border: 2px solid var(--green-pale); }
+        .search-bar input { flex: 1; padding: 0.9rem 1.2rem; border: none; background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; color: var(--text-primary); outline: none; }
+        .search-bar input::placeholder { color: var(--text-muted); }
+        .search-bar select { padding: 0.9rem 1rem; border: none; background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; color: var(--text-secondary); outline: none; cursor: pointer; border-left: 1px solid var(--cream-dark); appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%235a6b60' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; padding-right: 24px; }
+        .search-btn { background: var(--coral); color: var(--white); border: none; border-radius: 100px; padding: 0.9rem 1.6rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+        .search-btn:hover { background: var(--coral-dark); }
 
-        /* =========== SCROLL ANIMATIONS =========== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        /* PARTICULIER — PRO CARDS */
+        .pros-section { padding: 6rem 2rem; background: var(--white); }
+        .pros-section .section-inner { text-align: center; }
+        .pros-section .section-title, .pros-section .section-sub { margin-left: auto; margin-right: auto; }
+        .pros-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 1rem; }
+        .pro-card { background: var(--cream); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); border: 1px solid rgba(26,58,42,0.06); }
+        .pro-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .pro-card-img { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .pro-card-body { padding: 1.4rem 1.6rem 1.8rem; }
+        .pro-card-category { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--coral); background: #fde8e0; padding: 0.2rem 0.6rem; border-radius: 100px; margin-bottom: 0.6rem; }
+        .pro-card-name { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--green-deep); margin-bottom: 0.3rem; }
+        .pro-card-location { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+        .pro-card-services { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+        .pro-card-services span { font-size: 0.72rem; background: var(--white); padding: 0.25rem 0.6rem; border-radius: 100px; color: var(--text-secondary); border: 1px solid var(--cream-dark); }
+        .pro-card-footer { display: flex; align-items: center; justify-content: space-between; }
+        .pro-card-rating { display: flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; font-weight: 600; color: var(--green-deep); }
+        .pro-card-rating .stars { color: #f4b942; }
+        .pro-card-btn { font-size: 0.78rem; font-weight: 600; color: var(--coral); text-decoration: none; transition: color 0.2s; }
+        .pro-card-btn:hover { color: var(--coral-dark); }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* PARTICULIER — STEPS */
+        .how-section { padding: 6rem 2rem; }
+        .how-section .section-inner { text-align: center; }
+        .how-section .section-title, .how-section .section-sub { margin-left: auto; margin-right: auto; }
+        .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 1rem; }
+        .step-card { text-align: center; padding: 2rem 1.5rem; }
+        .step-number { width: 56px; height: 56px; border-radius: 50%; background: var(--green-deep); color: var(--cream); font-family: 'DM Serif Display', serif; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+        .step-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
+        .step-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
 
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
+        /* PARTICULIER — ADVANTAGES */
+        .advantages { padding: 6rem 2rem; background: var(--white); }
+        .advantages .section-inner { text-align: center; }
+        .advantages .section-title, .advantages .section-sub { margin-left: auto; margin-right: auto; }
+        .adv-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-top: 1rem; }
+        .adv-card { text-align: center; padding: 2rem 1.2rem; background: var(--cream); border-radius: var(--radius-lg); transition: all 0.3s ease; }
+        .adv-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .adv-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .adv-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.4rem; }
+        .adv-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
 
-        /* =========== RESPONSIVE =========== */
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; } .reveal-delay-2 { transition-delay: 0.2s; } .reveal-delay-3 { transition-delay: 0.3s; } .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* RESPONSIVE */
         @media (max-width: 900px) {
-            .hero-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
             .hero-sub { margin-left: auto; margin-right: auto; }
             .hero-actions { justify-content: center; }
             .hero-visual { order: -1; }
             .hero-card { max-width: 380px; margin: 0 auto; }
-            .float-notif { right: -8px; }
-            .float-revenue { left: -8px; }
-            .pain-grid, .feature-grid, .pricing-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin-left: auto;
-                margin-right: auto;
-            }
+            .float-notif { right: -8px; } .float-revenue { left: -8px; }
+            .pain-grid, .feature-grid, .pricing-grid, .pros-grid, .steps-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+            .adv-grid { grid-template-columns: repeat(2,1fr); }
             .price-card.featured { transform: scale(1); }
             .price-card.featured:hover { transform: translateY(-6px); }
             .footer-inner { flex-direction: column; align-items: center; text-align: center; }
@@ -1056,86 +272,72 @@
             .mobile-toggle { display: block; }
             .cta-form { flex-direction: column; }
             .cta-form button { width: 100%; }
+            .search-bar { flex-direction: column; border-radius: var(--radius-lg); padding: 0.6rem; }
+            .search-bar select { border-left: none; border-top: 1px solid var(--cream-dark); }
+            .search-bar-wrap { margin-left: auto; margin-right: auto; }
         }
-
         @media (max-width: 600px) {
             .hero { padding: 6rem 1.2rem 3rem; }
             .hero h1 { font-size: 2rem; }
             nav { padding: 0.8rem 1.2rem; }
+            .adv-grid { grid-template-columns: 1fr; max-width: 300px; margin-left: auto; margin-right: auto; }
+            .mode-label { font-size: 0.72rem; }
         }
     </style>
 </head>
 <body>
-    <!-- NAV -->
-    <nav id="navbar">
-        <div class="nav-inner">
-            <a href="#" class="logo">
-                <div class="logo-icon">🐾</div>
-                Animly
-            </a>
-            <ul class="nav-links">
-                <li><a href="#probleme">Solutions</a></li>
-                <li><a href="#fonctionnalites">Fonctionnalités</a></li>
-                <li><a href="#tarifs">Tarifs</a></li>
-                <li><a href="#inscription" class="nav-cta">Accès anticipé</a></li>
-            </ul>
-            <button class="mobile-toggle" onclick="toggleMenu()" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
 
-    <!-- HERO -->
+<!-- NAV -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+            <div class="logo-icon">🐾</div>
+            Animly
+        </a>
+        <div class="mode-toggle" onclick="toggleMode()">
+            <span class="mode-label active" id="lbl-part">Particulier</span>
+            <div class="toggle-track is-pro" id="toggle-track">
+                <div class="toggle-thumb"></div>
+            </div>
+            <span class="mode-label" id="lbl-pro">Professionnel</span>
+        </div>
+        <ul class="nav-links" id="nav-pro">
+            <li><a href="#probleme">Solutions</a></li>
+            <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+            <li><a href="#tarifs">Tarifs</a></li>
+            <li><a href="#inscription-pro" class="nav-cta">Accès anticipé</a></li>
+        </ul>
+        <ul class="nav-links" id="nav-part" style="display:none;">
+            <li><a href="#professionnels">Professionnels</a></li>
+            <li><a href="#comment-ca-marche">Comment ça marche</a></li>
+            <li><a href="#avantages">Avantages</a></li>
+            <li><a href="#inscription-part" class="nav-cta">S'inscrire</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<!-- ==================== PROFESSIONNEL ==================== -->
+<div class="page-mode active" id="mode-pro">
     <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-bg-2"></div>
+        <div class="hero-bg"></div><div class="hero-bg-2"></div>
         <div class="hero-inner">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <div class="hero-badge-dot"></div>
-                    Lancement juin 2026 — Gratuit
-                </div>
+                <div class="hero-badge"><div class="hero-badge-dot"></div>Lancement juin 2026 — Gratuit</div>
                 <h1>Gérez votre activité animalière <em>sans prise de tête</em></h1>
                 <p class="hero-sub">La première plateforme qui s'adresse à <strong>TOUS</strong> les professionnels animaliers.<br>Prise de réservation en ligne, facturation, gestion clients, visibilité web et AI — tout ce dont un pro animalier a besoin, dans un seul outil simple et efficace.</p>
                 <div class="hero-actions">
-                    <a href="#inscription" class="btn-primary">Rejoindre la liste d'attente →</a>
+                    <a href="#inscription-pro" class="btn-primary">Rejoindre la liste d'attente →</a>
                     <a href="#fonctionnalites" class="btn-secondary">Découvrir</a>
                 </div>
             </div>
             <div class="hero-visual">
                 <div class="hero-card">
-                    <div class="hero-card-header">
-                        <div class="hero-card-title">📅 Aujourd'hui</div>
-                        <div class="hero-card-date">Mardi 15 avril</div>
-                    </div>
+                    <div class="hero-card-header"><div class="hero-card-title">📅 Aujourd'hui</div><div class="hero-card-date">Mardi 15 avril</div></div>
                     <div class="appointment-list">
-                        <div class="appointment-item">
-                            <div class="appt-time">9h00</div>
-                            <div class="appt-avatar" style="background: #e0f5e8;">🐕</div>
-                            <div class="appt-info">
-                                <h4>Max — Toilettage complet</h4>
-                                <p>Mme. Dupont</p>
-                            </div>
-                            <div class="appt-status status-confirmed">Confirmé</div>
-                        </div>
-                        <div class="appointment-item">
-                            <div class="appt-time">11h30</div>
-                            <div class="appt-avatar" style="background: #fff3e0;">🐈</div>
-                            <div class="appt-info">
-                                <h4>Luna — Consultation</h4>
-                                <p>M. Martin</p>
-                            </div>
-                            <div class="appt-status status-pending">En attente</div>
-                        </div>
-                        <div class="appointment-item">
-                            <div class="appt-time">14h00</div>
-                            <div class="appt-avatar" style="background: #e8e0f5;">🐩</div>
-                            <div class="appt-info">
-                                <h4>Bella — Éducation canine</h4>
-                                <p>Mme. Roux</p>
-                            </div>
-                            <div class="appt-status status-confirmed">Confirmé</div>
-                        </div>
+                        <div class="appointment-item"><div class="appt-time">9h00</div><div class="appt-avatar" style="background:#e0f5e8;">🐕</div><div class="appt-info"><h4>Max — Toilettage complet</h4><p>Mme. Dupont</p></div><div class="appt-status status-confirmed">Confirmé</div></div>
+                        <div class="appointment-item"><div class="appt-time">11h30</div><div class="appt-avatar" style="background:#fff3e0;">🐈</div><div class="appt-info"><h4>Luna — Consultation</h4><p>M. Martin</p></div><div class="appt-status status-pending">En attente</div></div>
+                        <div class="appointment-item"><div class="appt-time">14h00</div><div class="appt-avatar" style="background:#e8e0f5;">🐩</div><div class="appt-info"><h4>Bella — Éducation canine</h4><p>Mme. Roux</p></div><div class="appt-status status-confirmed">Confirmé</div></div>
                     </div>
                 </div>
                 <div class="float-notif">✅ Nouveau RDV confirmé</div>
@@ -1143,264 +345,101 @@
             </div>
         </div>
     </section>
+    <div class="trust-bar reveal"><p>Conçu pour les professionnels de l'animal</p><div class="trust-logos"><span>✂️ Toiletteurs</span><span>🐾 Pet-sitters</span><span>🎓 Éducateurs</span><span>🏥 Vétérinaires</span><span>🦴 Ostéopathes</span><span>🚐 Transporteurs</span><span>💆 Masseurs & Spa</span><span>🏪 Animaleries</span><span>🐣 Éleveurs</span><span>📸 Photographes</span><span>🤝 Associations</span></div></div>
+    <section class="problem" id="probleme"><div class="section-inner"><div class="section-label reveal">⚡ Le problème</div><h2 class="section-title reveal">Votre talent, c'est les animaux. <br>Pas l'administratif.</h2><p class="section-sub reveal">Chaque jour, des milliers de professionnels animaliers perdent un temps précieux avec des outils inadaptés. Animly change la donne.</p><div class="pain-grid"><div class="pain-card reveal reveal-delay-1"><div class="pain-icon">📞</div><h3>Appels et SMS sans fin</h3><p>Vous passez des heures au téléphone pour confirmer des rendez-vous. Pendant ce temps, vous ne travaillez pas.</p></div><div class="pain-card reveal reveal-delay-2"><div class="pain-icon">📓</div><h3>Cahier, Excel, ou rien</h3><p>Pas d'outil dédié pour gérer votre planning. Résultat : des oublis, des doublons, des clients frustrés.</p></div><div class="pain-card reveal reveal-delay-3"><div class="pain-icon">💸</div><h3>Facturation artisanale</h3><p>Factures sous Word, relances manuelles, comptabilité approximative. Vous méritez mieux que ça.</p></div></div></div></section>
+    <section class="features" id="fonctionnalites"><div class="section-inner"><div class="section-label reveal">✨ La solution</div><h2 class="section-title reveal">Tout ce qu'il faut.<br>Rien de superflu.</h2><p class="section-sub reveal">Un outil pensé par et pour les professionnels animaliers. Pas un CRM générique détourné.</p><div class="feature-grid"><div class="feature-card reveal reveal-delay-1"><div class="feature-icon-wrap fi-green">📅</div><h3>Réservation en ligne 24/7</h3><p>Vos clients réservent quand ils veulent. Fini les allers-retours par téléphone. Confirmations automatiques par SMS.</p></div><div class="feature-card reveal reveal-delay-2"><div class="feature-icon-wrap fi-coral">🧾</div><h3>Facturation intégrée</h3><p>Créez vos factures en 2 clics. Envoi automatique, suivi des paiements, export comptable inclus.</p></div><div class="feature-card reveal reveal-delay-3"><div class="feature-icon-wrap fi-cream">🐾</div><h3>Fiches animaux complètes</h3><p>Historique des soins, allergies, vaccins, préférences — tout est centralisé et accessible en un coup d'œil.</p></div><div class="feature-card reveal reveal-delay-1"><div class="feature-icon-wrap fi-coral">📊</div><h3>Tableau de bord clair</h3><p>Chiffre d'affaires, nombre de clients, taux de remplissage — suivez votre activité en temps réel.</p></div><div class="feature-card reveal reveal-delay-2"><div class="feature-icon-wrap fi-green">💬</div><h3>Rappels automatiques</h3><p>SMS et email envoyés automatiquement avant chaque rendez-vous. Réduisez les no-shows de 70%.</p></div><div class="feature-card reveal reveal-delay-3"><div class="feature-icon-wrap fi-cream">🌐</div><h3>Votre mini-site pro</h3><p>Une page personnalisée avec vos services, tarifs et module de réservation. Partageable en un lien.</p></div></div></div></section>
+    <section class="pricing" id="tarifs"><div class="section-inner"><div class="section-label reveal">💎 Tarifs</div><h2 class="section-title reveal">Simple, transparent,<br>sans engagement</h2><p class="section-sub reveal">Commencez gratuitement. Évoluez quand vous êtes prêt.</p><div class="pricing-grid"><div class="price-card reveal reveal-delay-1"><div class="price-name">Découverte</div><div class="price-amount">0€</div><p class="price-desc">100% gratuit — pour découvrir la puissance d'Animly.</p><ul class="price-features"><li>Accès au réseau de professionnels animaliers</li><li>Messagerie instantanée</li><li>Adressage des patients</li><li>Agenda</li><li>Base patients</li><li>Gestionnaire de tâches</li></ul><a href="#inscription-pro" class="btn-price btn-price-outline">Commencer gratuitement</a></div><div class="price-card featured reveal reveal-delay-2"><div class="price-badge">Le + populaire</div><div class="price-name">Standard</div><div class="price-amount">49€ <span>/ mois</span></div><p class="price-desc">L'essentiel pour gérer votre activité sereinement.</p><ul class="price-features"><li>Tout Découverte inclus</li><li>RDV illimités</li><li>Facturation intégrée</li><li>Rappels SMS + email</li><li>Fiches animaux complètes</li><li>Tableau de bord</li><li>Support prioritaire</li></ul><a href="#inscription-pro" class="btn-price btn-price-filled">Essai gratuit 7 jours</a></div><div class="price-card reveal reveal-delay-3"><div class="price-name">Premium</div><div class="price-amount">79€ <span>/ mois</span></div><p class="price-desc">Pour les structures multi-pros et ambitieuses.</p><ul class="price-features"><li>Tout Standard inclus</li><li>Mini-site personnalisé</li><li>Paiement en ligne</li><li>API & intégrations</li><li>Analyses de vos données</li><li>Account manager dédié</li></ul><a href="#inscription-pro" class="btn-price btn-price-outline">Essai gratuit 7 jours</a></div></div></div></section>
+    <section class="cta-section" id="inscription-pro"><div class="cta-inner"><div class="section-label reveal">🚀 Accès anticipé</div><h2 class="section-title reveal">Soyez parmi les premiers<br>à essayer Animly</h2><p class="section-sub reveal">Inscrivez-vous pour recevoir un accès prioritaire au lancement. Gratuit, sans engagement.</p><form class="cta-form reveal" id="signup-form-pro" action="https://formspree.io/f/xzdyzpel" method="POST"><input type="hidden" name="type" value="professionnel"><input type="email" name="email" placeholder="Votre adresse email professionnelle" required><button type="submit" class="btn-primary">S'inscrire →</button></form><p class="cta-note reveal">🔒 Pas de spam. On vous contacte uniquement pour le lancement.</p><div class="cta-success" id="success-msg-pro">🎉 Merci ! Vous êtes sur la liste. On vous contacte très vite.</div></div></section>
+</div>
 
-    <!-- TRUST BAR -->
-    <div class="trust-bar reveal">
-        <p>Conçu pour les professionnels de l'animal</p>
-        <div class="trust-logos">
-            <span>✂️ Toiletteurs</span>
-            <span>🐾 Pet-sitters</span>
-            <span>🎓 Éducateurs</span>
-            <span>🏥 Vétérinaires</span>
-            <span>🦴 Ostéopathes</span>
-            <span>🚐 Transporteurs</span>
-            <span>💆 Masseurs & Spa</span>
-            <span>🏪 Animaleries</span>
-            <span>🐣 Éleveurs</span>
-            <span>📸 Photographes</span>
-            <span>🤝 Associations</span>
+<!-- ==================== PARTICULIER ==================== -->
+<div class="page-mode" id="mode-part">
+    <section class="hero">
+        <div class="hero-bg"></div><div class="hero-bg-2"></div>
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-badge"><div class="hero-badge-dot"></div>Lancement juin 2026 — 100% gratuit pour les particuliers</div>
+                <h1>Trouvez le professionnel <em>idéal</em> pour votre animal</h1>
+                <p class="hero-sub">Toiletteur, vétérinaire, éducateur, pet-sitter, ostéopathe… Tous les pros animaliers de votre ville, vérifiés et disponibles en un clic.</p>
+                <div class="search-bar-wrap">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Quel professionnel cherchez-vous ?">
+                        <select><option>📍 Ville</option><option>Lyon</option><option>Bordeaux</option><option>Nantes</option><option>Paris</option><option>Marseille</option><option>La Rochelle</option></select>
+                        <button class="search-btn">Rechercher</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card" style="padding:1.5rem;">
+                    <div class="hero-card-header"><div class="hero-card-title">🐾 Près de chez vous</div><div class="hero-card-date">12 pros disponibles</div></div>
+                    <div class="appointment-list">
+                        <div class="appointment-item"><div class="appt-avatar" style="background:#e0f5e8;">✂️</div><div class="appt-info"><h4>Pattes Douces</h4><p>Toilettage — Lyon 3e</p></div><div class="appt-status status-confirmed">Dispo</div></div>
+                        <div class="appointment-item"><div class="appt-avatar" style="background:#fff3e0;">🦴</div><div class="appt-info"><h4>Dr. Lefèvre</h4><p>Ostéopathe — Bordeaux</p></div><div class="appt-status status-confirmed">Dispo</div></div>
+                        <div class="appointment-item"><div class="appt-avatar" style="background:#e8e0f5;">🎓</div><div class="appt-info"><h4>Canin'Expert</h4><p>Éducateur — Nantes</p></div><div class="appt-status status-pending">Bientôt</div></div>
+                    </div>
+                </div>
+                <div class="float-notif">⭐ 4.9/5 — 127 avis</div>
+                <div class="float-revenue">🗓️ Prochain RDV dans 2h</div>
+            </div>
+        </div>
+    </section>
+    <div class="trust-bar reveal"><p>Tous les professionnels de l'animal au même endroit</p><div class="trust-logos"><span>✂️ Toiletteurs</span><span>🐾 Pet-sitters</span><span>🎓 Éducateurs</span><span>🏥 Vétérinaires</span><span>🦴 Ostéopathes</span><span>🚐 Transporteurs</span><span>💆 Masseurs & Spa</span><span>🏪 Animaleries</span><span>🐣 Éleveurs</span><span>📸 Photographes</span><span>🤝 Associations</span></div></div>
+    <section class="pros-section" id="professionnels"><div class="section-inner"><div class="section-label reveal">🔍 Professionnels vérifiés</div><h2 class="section-title reveal">Découvrez les pros<br>près de chez vous</h2><p class="section-sub reveal">Des professionnels qualifiés, avec avis clients et réservation en ligne. Bientôt dans votre ville.</p><div class="pros-grid">
+        <div class="pro-card reveal reveal-delay-1"><div class="pro-card-img" style="background:linear-gradient(135deg,#e8f0eb,#d4e8db);">✂️</div><div class="pro-card-body"><span class="pro-card-category">Toilettage</span><h3 class="pro-card-name">Pattes Douces</h3><div class="pro-card-location">📍 Lyon 3e</div><div class="pro-card-services"><span>Toilettage complet</span><span>Bain & brushing</span><span>Coupe ciseaux</span></div><div class="pro-card-footer"><div class="pro-card-rating"><span class="stars">★★★★★</span> 4.9</div><a href="#inscription-part" class="pro-card-btn">Voir le profil →</a></div></div></div>
+        <div class="pro-card reveal reveal-delay-2"><div class="pro-card-img" style="background:linear-gradient(135deg,#fde8e0,#f5d0c0);">🏥</div><div class="pro-card-body"><span class="pro-card-category">Vétérinaire</span><h3 class="pro-card-name">Clinique des Chartrons</h3><div class="pro-card-location">📍 Bordeaux</div><div class="pro-card-services"><span>Consultation</span><span>Vaccination</span><span>Chirurgie</span><span>Urgences</span></div><div class="pro-card-footer"><div class="pro-card-rating"><span class="stars">★★★★</span><span class="stars" style="opacity:0.3">★</span> 4.6</div><a href="#inscription-part" class="pro-card-btn">Voir le profil →</a></div></div></div>
+        <div class="pro-card reveal reveal-delay-3"><div class="pro-card-img" style="background:linear-gradient(135deg,#e8e0f5,#d5cceb);">🎓</div><div class="pro-card-body"><span class="pro-card-category">Éducation canine</span><h3 class="pro-card-name">Canin'Expert</h3><div class="pro-card-location">📍 Nantes</div><div class="pro-card-services"><span>Éducation positive</span><span>Socialisation</span><span>Agility</span></div><div class="pro-card-footer"><div class="pro-card-rating"><span class="stars">★★★★★</span> 4.8</div><a href="#inscription-part" class="pro-card-btn">Voir le profil →</a></div></div></div>
+        <div class="pro-card reveal reveal-delay-1"><div class="pro-card-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);">🐾</div><div class="pro-card-body"><span class="pro-card-category">Pet-sitting</span><h3 class="pro-card-name">Happy Pattes</h3><div class="pro-card-location">📍 Lyon 6e</div><div class="pro-card-services"><span>Garde à domicile</span><span>Promenade</span><span>Visite quotidienne</span></div><div class="pro-card-footer"><div class="pro-card-rating"><span class="stars">★★★★★</span> 5.0</div><a href="#inscription-part" class="pro-card-btn">Voir le profil →</a></div></div></div>
+        <div class="pro-card reveal reveal-delay-2"><div class="pro-card-img" style="background:linear-gradient(135deg,#e0f0f5,#c5e3ed);">🦴</div><div class="pro-card-body"><span class="pro-card-category">Ostéopathie animale</span><h3 class="pro-card-name">Dr. Marie Lefèvre</h3><div class="pro-card-location">📍 Bordeaux</div><div class="pro-card-services"><span>Ostéopathie</span><span>Rééducation</span><span>Post-opératoire</span></div><div class="pro-card-footer"><div class="pro-card-rating"><span class="stars">★★★★★</span> 4.9</div><a href="#inscription-part" class="pro-card-btn">Voir le profil →</a></div></div></div>
+        <div class="pro-card reveal reveal-delay-3"><div class="pro-card-img" style="background:linear-gradient(135deg,#f0e8f5,#e0d0f0);">📸</div><div class="pro-card-body"><span class="pro-card-category">Photographie animalière</span><h3 class="pro-card-name">Studio Museau</h3><div class="pro-card-location">📍 Nantes</div><div class="pro-card-services"><span>Portrait studio</span><span>Shooting extérieur</span><span>Book pro</span></div><div class="pro-card-footer"><div class="pro-card-rating"><span class="stars">★★★★★</span> 5.0</div><a href="#inscription-part" class="pro-card-btn">Voir le profil →</a></div></div></div>
+    </div></div></section>
+    <section class="how-section" id="comment-ca-marche"><div class="section-inner"><div class="section-label reveal">🛤️ Simple comme bonjour</div><h2 class="section-title reveal">Comment ça marche ?</h2><p class="section-sub reveal">Trouver le bon professionnel pour votre animal n'a jamais été aussi simple.</p><div class="steps-grid"><div class="step-card reveal reveal-delay-1"><div class="step-number">1</div><h3>Cherchez</h3><p>Tapez le type de professionnel et votre ville. Parcourez les profils, les avis et les disponibilités.</p></div><div class="step-card reveal reveal-delay-2"><div class="step-number">2</div><h3>Comparez</h3><p>Consultez les tarifs, les spécialités, les photos et les avis d'autres propriétaires d'animaux.</p></div><div class="step-card reveal reveal-delay-3"><div class="step-number">3</div><h3>Réservez</h3><p>Prenez rendez-vous en ligne en 30 secondes. Confirmation instantanée et rappel avant le jour J.</p></div></div></div></section>
+    <section class="advantages" id="avantages"><div class="section-inner"><div class="section-label reveal">💚 Pourquoi Animly ?</div><h2 class="section-title reveal">Le bien-être de votre animal,<br>en toute confiance</h2><p class="section-sub reveal">Animly vous garantit une expérience simple, fiable et transparente.</p><div class="adv-grid"><div class="adv-card reveal reveal-delay-1"><div class="adv-icon">✅</div><h3>Pros vérifiés</h3><p>Chaque professionnel est vérifié. Diplômes, assurances, avis — tout est transparent.</p></div><div class="adv-card reveal reveal-delay-2"><div class="adv-icon">⭐</div><h3>Avis authentiques</h3><p>Des avis laissés uniquement par des clients ayant réellement pris rendez-vous.</p></div><div class="adv-card reveal reveal-delay-3"><div class="adv-icon">🗓️</div><h3>Réservation instantanée</h3><p>Plus d'appels, plus d'attente. Réservez en ligne 24/7, même le dimanche soir.</p></div><div class="adv-card reveal reveal-delay-4"><div class="adv-icon">🔔</div><h3>Rappels automatiques</h3><p>SMS et email avant chaque rendez-vous. Vous n'oubliez plus jamais un vaccin.</p></div></div></div></section>
+    <section class="cta-section" id="inscription-part"><div class="cta-inner"><div class="section-label reveal">🐾 Rejoignez Animly</div><h2 class="section-title reveal">Soyez prévenu<br>dès le lancement</h2><p class="section-sub reveal">Inscrivez-vous pour être parmi les premiers à trouver et réserver les meilleurs pros animaliers de votre ville. Gratuit, sans engagement.</p><form class="cta-form reveal" id="signup-form-part" action="https://formspree.io/f/xzdyzpel" method="POST"><input type="hidden" name="type" value="particulier"><input type="email" name="email" placeholder="Votre adresse email" required><button type="submit" class="btn-primary">S'inscrire →</button></form><p class="cta-note reveal">🔒 Pas de spam. On vous contacte uniquement pour le lancement.</p><div class="cta-success" id="success-msg-part">🎉 Merci ! Vous serez parmi les premiers informés du lancement.</div></div></section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand"><a href="#" class="logo"><div class="logo-icon">🐾</div>Animly</a><p>La plateforme qui simplifie la vie des professionnels animaliers. Conçue en France avec ❤️</p></div>
+        <div class="footer-links">
+            <div class="footer-col"><h4>Produit</h4><ul><li><a href="#fonctionnalites">Fonctionnalités</a></li><li><a href="#tarifs">Tarifs</a></li><li><a href="#inscription-pro">Accès anticipé</a></li></ul></div>
+            <div class="footer-col"><h4>Ressources</h4><ul><li><a href="#">Blog</a></li><li><a href="#">FAQ</a></li><li><a href="mailto:contact@animly.co">Contact</a></li></ul></div>
+            <div class="footer-col"><h4>Légal</h4><ul><li><a href="#">Mentions légales</a></li><li><a href="#">CGU</a></li><li><a href="#">Politique de confidentialité</a></li></ul></div>
         </div>
     </div>
+    <div class="footer-bottom"><span>© 2026 Animly. Tous droits réservés.</span><span>Fait avec 🐾 pour les pros animaliers</span></div>
+</footer>
 
-    <!-- PROBLEM -->
-    <section class="problem" id="probleme">
-        <div class="section-inner">
-            <div class="section-label reveal">⚡ Le problème</div>
-            <h2 class="section-title reveal">Votre talent, c'est les animaux. <br>Pas l'administratif.</h2>
-            <p class="section-sub reveal">Chaque jour, des milliers de professionnels animaliers perdent un temps précieux avec des outils inadaptés. Animly change la donne.</p>
-            <div class="pain-grid">
-                <div class="pain-card reveal reveal-delay-1">
-                    <div class="pain-icon">📞</div>
-                    <h3>Appels et SMS sans fin</h3>
-                    <p>Vous passez des heures au téléphone pour confirmer des rendez-vous. Pendant ce temps, vous ne travaillez pas.</p>
-                </div>
-                <div class="pain-card reveal reveal-delay-2">
-                    <div class="pain-icon">📓</div>
-                    <h3>Cahier, Excel, ou rien</h3>
-                    <p>Pas d'outil dédié pour gérer votre planning. Résultat : des oublis, des doublons, des clients frustrés.</p>
-                </div>
-                <div class="pain-card reveal reveal-delay-3">
-                    <div class="pain-icon">💸</div>
-                    <h3>Facturation artisanale</h3>
-                    <p>Factures sous Word, relances manuelles, comptabilité approximative. Vous méritez mieux que ça.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section class="features" id="fonctionnalites">
-        <div class="section-inner">
-            <div class="section-label reveal">✨ La solution</div>
-            <h2 class="section-title reveal">Tout ce qu'il faut.<br>Rien de superflu.</h2>
-            <p class="section-sub reveal">Un outil pensé par et pour les professionnels animaliers. Pas un CRM générique détourné.</p>
-            <div class="feature-grid">
-                <div class="feature-card reveal reveal-delay-1">
-                    <div class="feature-icon-wrap fi-green">📅</div>
-                    <h3>Réservation en ligne 24/7</h3>
-                    <p>Vos clients réservent quand ils veulent. Fini les allers-retours par téléphone. Confirmations automatiques par SMS.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-2">
-                    <div class="feature-icon-wrap fi-coral">🧾</div>
-                    <h3>Facturation intégrée</h3>
-                    <p>Créez vos factures en 2 clics. Envoi automatique, suivi des paiements, export comptable inclus.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-3">
-                    <div class="feature-icon-wrap fi-cream">🐾</div>
-                    <h3>Fiches animaux complètes</h3>
-                    <p>Historique des soins, allergies, vaccins, préférences — tout est centralisé et accessible en un coup d'œil.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-1">
-                    <div class="feature-icon-wrap fi-coral">📊</div>
-                    <h3>Tableau de bord clair</h3>
-                    <p>Chiffre d'affaires, nombre de clients, taux de remplissage — suivez votre activité en temps réel.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-2">
-                    <div class="feature-icon-wrap fi-green">💬</div>
-                    <h3>Rappels automatiques</h3>
-                    <p>SMS et email envoyés automatiquement avant chaque rendez-vous. Réduisez les no-shows de 70%.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-3">
-                    <div class="feature-icon-wrap fi-cream">🌐</div>
-                    <h3>Votre mini-site pro</h3>
-                    <p>Une page personnalisée avec vos services, tarifs et module de réservation. Partageable en un lien.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRICING -->
-    <section class="pricing" id="tarifs">
-        <div class="section-inner">
-            <div class="section-label reveal">💎 Tarifs</div>
-            <h2 class="section-title reveal">Simple, transparent,<br>sans engagement</h2>
-            <p class="section-sub reveal">Commencez gratuitement. Évoluez quand vous êtes prêt.</p>
-            <div class="pricing-grid">
-                <div class="price-card reveal reveal-delay-1">
-                    <div class="price-name">Découverte</div>
-                    <div class="price-amount">0€</div>
-                    <p class="price-desc">100% gratuit — pour découvrir la puissance d'Animly.</p>
-                    <ul class="price-features">
-                        <li>Accès au réseau de professionnels animaliers</li>
-                        <li>Messagerie instantanée</li>
-                        <li>Adressage des patients</li>
-                        <li>Agenda</li>
-                        <li>Base patients</li>
-                        <li>Gestionnaire de tâches</li>
-                    </ul>
-                    <a href="#inscription" class="btn-price btn-price-outline">Commencer gratuitement</a>
-                </div>
-                <div class="price-card featured reveal reveal-delay-2">
-                    <div class="price-badge">Le + populaire</div>
-                    <div class="price-name">Standard</div>
-                    <div class="price-amount">49€ <span>/ mois</span></div>
-                    <p class="price-desc">L'essentiel pour gérer votre activité sereinement.</p>
-                    <ul class="price-features">
-                        <li>Tout Découverte inclus</li>
-                        <li>RDV illimités</li>
-                        <li>Facturation intégrée</li>
-                        <li>Rappels SMS + email</li>
-                        <li>Fiches animaux complètes</li>
-                        <li>Tableau de bord</li>
-                        <li>Support prioritaire</li>
-                    </ul>
-                    <a href="#inscription" class="btn-price btn-price-filled">Essai gratuit 7 jours</a>
-                </div>
-                <div class="price-card reveal reveal-delay-3">
-                    <div class="price-name">Premium</div>
-                    <div class="price-amount">79€ <span>/ mois</span></div>
-                    <p class="price-desc">Pour les structures multi-pros et ambitieuses.</p>
-                    <ul class="price-features">
-                        <li>Tout Standard inclus</li>
-                        <li>Mini-site personnalisé</li>
-                        <li>Paiement en ligne</li>
-                        <li>API & intégrations</li>
-                        <li>Analyses de vos données</li>
-                        <li>Account manager dédié</li>
-                    </ul>
-                    <a href="#inscription" class="btn-price btn-price-outline">Essai gratuit 7 jours</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA FORM -->
-    <section class="cta-section" id="inscription">
-        <div class="cta-inner">
-            <div class="section-label reveal">🚀 Accès anticipé</div>
-            <h2 class="section-title reveal">Soyez parmi les premiers<br>à essayer Animly</h2>
-            <p class="section-sub reveal">Inscrivez-vous pour recevoir un accès prioritaire au lancement. Gratuit, sans engagement.</p>
-            <form class="cta-form reveal" id="signup-form" action="https://formspree.io/f/xzdyzpel" method="POST">
-                <input type="email" name="email" placeholder="Votre adresse email" required>
-                <button type="submit" class="btn-primary">S'inscrire →</button>
-            </form>
-            <p class="cta-note reveal">🔒 Pas de spam. On vous contacte uniquement pour le lancement.</p>
-            <div class="cta-success" id="success-msg">
-                🎉 Merci ! Vous êtes sur la liste. On vous contacte très vite.
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <a href="#" class="logo">
-                    <div class="logo-icon">🐾</div>
-                    Animly
-                </a>
-                <p>La plateforme qui simplifie la vie des professionnels animaliers. Conçue en France avec ❤️</p>
-            </div>
-            <div class="footer-links">
-                <div class="footer-col">
-                    <h4>Produit</h4>
-                    <ul>
-                        <li><a href="#fonctionnalites">Fonctionnalités</a></li>
-                        <li><a href="#tarifs">Tarifs</a></li>
-                        <li><a href="#inscription">Accès anticipé</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Ressources</h4>
-                    <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="mailto:contact@animly.fr">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Légal</h4>
-                    <ul>
-                        <li><a href="#">Mentions légales</a></li>
-                        <li><a href="#">CGU</a></li>
-                        <li><a href="#">Politique de confidentialité</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span>© 2026 Animly. Tous droits réservés.</span>
-            <span>Fait avec 🐾 pour les pros animaliers</span>
-        </div>
-    </footer>
-
-    <script>
-        // Scroll reveal
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-        reveals.forEach(el => observer.observe(el));
-
-        // Nav scroll
-        const nav = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Form submit
-        const form = document.getElementById('signup-form');
-        const successMsg = document.getElementById('success-msg');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const data = new FormData(form);
-            try {
-                await fetch(form.action, {
-                    method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
-                });
-                form.style.display = 'none';
-                successMsg.style.display = 'block';
-            } catch (err) {
-                alert('Une erreur est survenue. Réessayez.');
-            }
-        });
-
-        // Mobile menu
-        function toggleMenu() {
-            const links = document.querySelector('.nav-links');
-            if (links.style.display === 'flex') {
-                links.style.display = 'none';
-            } else {
-                links.style.display = 'flex';
-                links.style.flexDirection = 'column';
-                links.style.position = 'absolute';
-                links.style.top = '100%';
-                links.style.left = '0';
-                links.style.right = '0';
-                links.style.background = 'rgba(250,246,240,0.98)';
-                links.style.padding = '1.5rem';
-                links.style.borderRadius = '0 0 16px 16px';
-                links.style.boxShadow = '0 12px 40px rgba(0,0,0,0.1)';
-            }
-        }
-    </script>
+<script>
+let isPro = true;
+function toggleMode() {
+    isPro = !isPro;
+    document.getElementById('toggle-track').classList.toggle('is-pro', isPro);
+    document.getElementById('lbl-pro').classList.toggle('active', isPro);
+    document.getElementById('lbl-part').classList.toggle('active', !isPro);
+    document.getElementById('mode-pro').classList.toggle('active', isPro);
+    document.getElementById('mode-part').classList.toggle('active', !isPro);
+    document.getElementById('nav-pro').style.display = isPro ? '' : 'none';
+    document.getElementById('nav-part').style.display = isPro ? 'none' : '';
+    document.title = isPro ? 'Animly — La plateforme des pros animaliers' : 'Animly — Trouvez le pro idéal pour votre animal';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => { document.querySelectorAll('.page-mode.active .reveal:not(.visible)').forEach(el => observer.observe(el)); }, 200);
+}
+const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+document.querySelectorAll('form[id^="signup-form"]').forEach(form => {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try { await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } }); form.style.display = 'none'; document.getElementById(form.id.replace('signup-form', 'success-msg')).style.display = 'block'; } catch (err) { alert('Une erreur est survenue. Réessayez.'); }
+    });
+});
+function toggleMenu() {
+    const nav = isPro ? document.getElementById('nav-pro') : document.getElementById('nav-part');
+    if (nav.style.position === 'absolute') { nav.style.display = 'none'; nav.style.position = ''; }
+    else { nav.style.display = 'flex'; nav.style.flexDirection = 'column'; nav.style.position = 'absolute'; nav.style.top = '100%'; nav.style.left = '0'; nav.style.right = '0'; nav.style.background = 'rgba(250,246,240,0.98)'; nav.style.padding = '1.5rem'; nav.style.borderRadius = '0 0 16px 16px'; nav.style.boxShadow = '0 12px 40px rgba(0,0,0,0.1)'; }
+}
+</script>
 </body>
 </html>
