@@ -48,13 +48,12 @@
         .logo:hover .logo-icon { transform: rotate(-8deg) scale(1.05); }
 
         /* TOGGLE */
-        .mode-toggle { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; user-select: none; }
-        .mode-label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); transition: color 0.3s; }
-        .mode-label.active { color: var(--green-deep); }
-        .toggle-track { width: 44px; height: 24px; background: var(--coral); border-radius: 100px; position: relative; transition: background 0.3s; flex-shrink: 0; }
-        .toggle-track.is-pro { background: var(--green-deep); }
-        .toggle-thumb { width: 20px; height: 20px; background: var(--white); border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: var(--shadow-sm); }
-        .toggle-track.is-pro .toggle-thumb { transform: translateX(20px); }
+        .mode-toggle { display: flex; background: var(--cream-dark); border-radius: 100px; padding: 3px; position: relative; cursor: pointer; user-select: none; border: 1px solid rgba(26,58,42,0.08); }
+        .mode-btn { padding: 0.5rem 1.1rem; border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); transition: all 0.35s cubic-bezier(0.16,1,0.3,1); position: relative; z-index: 1; white-space: nowrap; width: 50%; text-align: center; }
+        .mode-btn.active { color: var(--white); }
+        .mode-slider { position: absolute; top: 3px; bottom: 3px; width: 50%; border-radius: 100px; background: var(--green-deep); transition: all 0.35s cubic-bezier(0.16,1,0.3,1); z-index: 0; box-shadow: var(--shadow-md); }
+        .mode-toggle.is-part .mode-slider { background: var(--coral); left: 3px !important; }
+        .mode-toggle.is-pro .mode-slider { left: calc(50% - 3px) !important; }
 
         .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
         .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
@@ -294,12 +293,10 @@
             <div class="logo-icon">🐾</div>
             Animly
         </a>
-        <div class="mode-toggle" onclick="toggleMode()">
-            <span class="mode-label active" id="lbl-part">Particulier</span>
-            <div class="toggle-track is-pro" id="toggle-track">
-                <div class="toggle-thumb"></div>
-            </div>
-            <span class="mode-label" id="lbl-pro">Professionnel</span>
+        <div class="mode-toggle is-pro" id="mode-toggle" onclick="toggleMode()">
+            <span class="mode-btn" id="btn-part">Particuliers &nbsp;🐾</span>
+            <span class="mode-btn active" id="btn-pro">Pro animalier &nbsp;🦮</span>
+            <div class="mode-slider" id="mode-slider"></div>
         </div>
         <ul class="nav-links" id="nav-pro">
             <li><a href="#probleme">Solutions</a></li>
@@ -414,9 +411,11 @@
 let isPro = true;
 function toggleMode() {
     isPro = !isPro;
-    document.getElementById('toggle-track').classList.toggle('is-pro', isPro);
-    document.getElementById('lbl-pro').classList.toggle('active', isPro);
-    document.getElementById('lbl-part').classList.toggle('active', !isPro);
+    document.getElementById('btn-pro').classList.toggle('active', isPro);
+    document.getElementById('btn-part').classList.toggle('active', !isPro);
+    const toggle = document.getElementById('mode-toggle');
+    toggle.classList.toggle('is-part', !isPro);
+    toggle.classList.toggle('is-pro', isPro);
     document.getElementById('mode-pro').classList.toggle('active', isPro);
     document.getElementById('mode-part').classList.toggle('active', !isPro);
     document.getElementById('nav-pro').style.display = isPro ? '' : 'none';
