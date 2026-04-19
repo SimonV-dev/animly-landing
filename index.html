@@ -6,9 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animly — La plateforme des pros animaliers</title>
     <meta name="description" content="Animly simplifie la gestion de votre activité animalière : réservation en ligne, facturation, gestion clients. Le Doctolib des professionnels de l'animal.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* DM Serif Display */
+        @font-face { font-family: 'DM Serif Display'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/-nFnOHM81r4j6k0gjAW3mujVU2B2G_5x0vrx52jJ3Q.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        @font-face { font-family: 'DM Serif Display'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/-nFnOHM81r4j6k0gjAW3mujVU2B2G_Bx0vrx52g.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        @font-face { font-family: 'DM Serif Display'; font-style: italic; font-weight: 400; font-display: swap; src: url('fonts/-nFhOHM81r4j6k0gjAW3mujVU2B2G_VB3vD2xWr53BJl.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        @font-face { font-family: 'DM Serif Display'; font-style: italic; font-weight: 400; font-display: swap; src: url('fonts/-nFhOHM81r4j6k0gjAW3mujVU2B2G_VB0PD2xWr53A.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        /* Plus Jakarta Sans */
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('fonts/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko70yygg_vbd-E.woff2') format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('fonts/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko50yygg_vbd-E.woff2') format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('fonts/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko40yygg_vbd-E.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('fonts/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    </style>
     <style>
         :root {
             --green-deep: #1a3a2a;
@@ -83,6 +92,12 @@
         .hero h1 em { color: var(--coral); font-style: italic; }
         .hero-sub { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2.5rem; max-width: 480px; font-weight: 300; }
         .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        .hero-signup-form { display: flex; gap: 0.5rem; max-width: 480px; margin-bottom: 0.75rem; }
+        .hero-signup-form input[type="email"] { flex: 1; padding: 1rem 1.2rem; border: 2px solid var(--green-pale); border-radius: 100px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; color: var(--text-primary); outline: none; transition: border-color 0.2s; background: var(--white); }
+        .hero-signup-form input[type="email"]:focus { border-color: var(--coral); }
+        .hero-signup-form input[type="email"]::placeholder { color: var(--text-muted); }
+        .hero-signup-note { font-size: 0.82rem; color: var(--text-muted); margin-top: 0; }
+        .hero-signup-success { display: none; font-size: 0.95rem; color: var(--green-mid); font-weight: 600; margin-bottom: 0.5rem; }
         .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: var(--white); padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 4px 16px rgba(232,120,90,0.3); }
         .btn-primary:hover { background: var(--coral-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,120,90,0.4); }
         .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--green-deep); padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 1rem; border: 2px solid var(--green-deep); cursor: pointer; transition: all 0.3s ease; }
@@ -197,14 +212,6 @@
         .footer-col a:hover { color: var(--cream); }
         .footer-bottom { max-width: 1100px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; }
 
-        /* PARTICULIER — SEARCH */
-        .search-bar-wrap { max-width: 600px; margin-bottom: 2.5rem; }
-        .search-bar { display: flex; gap: 0.5rem; background: var(--white); border-radius: 100px; padding: 0.4rem; box-shadow: var(--shadow-lg); border: 2px solid var(--green-pale); }
-        .search-bar input { flex: 1; padding: 0.9rem 1.2rem; border: none; background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; color: var(--text-primary); outline: none; }
-        .search-bar input::placeholder { color: var(--text-muted); }
-        .search-bar select { padding: 0.9rem 1rem; border: none; background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; color: var(--text-secondary); outline: none; cursor: pointer; border-left: 1px solid var(--cream-dark); appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%235a6b60' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; padding-right: 24px; }
-        .search-btn { background: var(--coral); color: var(--white); border: none; border-radius: 100px; padding: 0.9rem 1.6rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
-        .search-btn:hover { background: var(--coral-dark); }
 
         /* PARTICULIER — PRO CARDS */
         .pros-section { padding: 6rem 2rem; background: var(--white); }
@@ -258,6 +265,10 @@
             .hero-sub { margin-left: auto; margin-right: auto; }
             .hero-actions { justify-content: center; }
             .hero-visual { order: -1; }
+            .hero-signup-form { flex-direction: column; border-radius: 1rem; max-width: 100%; }
+            .hero-signup-form input[type="email"] { border-radius: 100px; }
+            .hero-signup-form .btn-primary { width: 100%; justify-content: center; border-radius: 100px; }
+            .hero-signup-note { text-align: center; }
             .hero-card { max-width: 380px; margin: 0 auto; }
             .float-notif { right: -8px; } .float-revenue { left: -8px; }
             .pain-grid, .feature-grid, .pricing-grid, .pros-grid, .steps-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
@@ -271,16 +282,17 @@
             .mobile-toggle { display: block; }
             .cta-form { flex-direction: column; }
             .cta-form button { width: 100%; }
-            .search-bar { flex-direction: column; border-radius: var(--radius-lg); padding: 0.6rem; }
-            .search-bar select { border-left: none; border-top: 1px solid var(--cream-dark); }
-            .search-bar-wrap { margin-left: auto; margin-right: auto; }
+
         }
         @media (max-width: 600px) {
             .hero { padding: 6rem 1.2rem 3rem; }
             .hero h1 { font-size: 2rem; }
             nav { padding: 0.8rem 1.2rem; }
             .adv-grid { grid-template-columns: 1fr; max-width: 300px; margin-left: auto; margin-right: auto; }
-            .mode-label { font-size: 0.72rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .float-notif, .float-revenue { animation: none; }
+            .hero-badge-dot { animation: none; }
         }
     </style>
 </head>
@@ -346,7 +358,7 @@
     <section class="problem" id="probleme"><div class="section-inner"><div class="section-label reveal">⚡ Le problème</div><h2 class="section-title reveal">Votre talent, c'est les animaux. <br>Pas l'administratif.</h2><p class="section-sub reveal">Chaque jour, des milliers de professionnels animaliers perdent un temps précieux avec des outils inadaptés. Animly change la donne.</p><div class="pain-grid"><div class="pain-card reveal reveal-delay-1"><div class="pain-icon">📞</div><h3>Appels et SMS sans fin</h3><p>Vous passez des heures au téléphone pour confirmer des rendez-vous. Pendant ce temps, vous ne travaillez pas.</p></div><div class="pain-card reveal reveal-delay-2"><div class="pain-icon">📓</div><h3>Cahier, Excel, ou rien</h3><p>Pas d'outil dédié pour gérer votre planning. Résultat : des oublis, des doublons, des clients frustrés.</p></div><div class="pain-card reveal reveal-delay-3"><div class="pain-icon">💸</div><h3>Facturation artisanale</h3><p>Factures sous Word, relances manuelles, comptabilité approximative. Vous méritez mieux que ça.</p></div></div></div></section>
     <section class="features" id="fonctionnalites"><div class="section-inner"><div class="section-label reveal">✨ La solution</div><h2 class="section-title reveal">Tout ce qu'il faut.<br>Rien de superflu.</h2><p class="section-sub reveal">Un outil pensé par et pour les professionnels animaliers. Pas un CRM générique détourné.</p><div class="feature-grid"><div class="feature-card reveal reveal-delay-1"><div class="feature-icon-wrap fi-green">📅</div><h3>Réservation en ligne 24/7</h3><p>Vos clients réservent quand ils veulent. Fini les allers-retours par téléphone. Confirmations automatiques par SMS.</p></div><div class="feature-card reveal reveal-delay-2"><div class="feature-icon-wrap fi-coral">🧾</div><h3>Facturation intégrée</h3><p>Créez vos factures en 2 clics. Envoi automatique, suivi des paiements, export comptable inclus.</p></div><div class="feature-card reveal reveal-delay-3"><div class="feature-icon-wrap fi-cream">🐾</div><h3>Fiches animaux complètes</h3><p>Historique des soins, allergies, vaccins, préférences — tout est centralisé et accessible en un coup d'œil.</p></div><div class="feature-card reveal reveal-delay-1"><div class="feature-icon-wrap fi-coral">📊</div><h3>Tableau de bord clair</h3><p>Chiffre d'affaires, nombre de clients, taux de remplissage — suivez votre activité en temps réel.</p></div><div class="feature-card reveal reveal-delay-2"><div class="feature-icon-wrap fi-green">💬</div><h3>Rappels automatiques</h3><p>SMS et email envoyés automatiquement avant chaque rendez-vous. Réduisez les no-shows de 70%.</p></div><div class="feature-card reveal reveal-delay-3"><div class="feature-icon-wrap fi-cream">🌐</div><h3>Votre mini-site pro</h3><p>Une page personnalisée avec vos services, tarifs et module de réservation. Partageable en un lien.</p></div></div></div></section>
     <section class="pricing" id="tarifs"><div class="section-inner"><div class="section-label reveal">💎 Tarifs</div><h2 class="section-title reveal">Simple, transparent,<br>sans engagement</h2><p class="section-sub reveal">Commencez gratuitement. Évoluez quand vous êtes prêt.</p><div class="pricing-grid"><div class="price-card reveal reveal-delay-1"><div class="price-name">Découverte</div><div class="price-amount">0€</div><p class="price-desc">100% gratuit — pour découvrir la puissance d'Animly.</p><ul class="price-features"><li>Accès au réseau de professionnels animaliers</li><li>Messagerie instantanée</li><li>Adressage des patients</li><li>Agenda</li><li>Base patients</li><li>Gestionnaire de tâches</li></ul><a href="#inscription-pro" class="btn-price btn-price-outline">Commencer gratuitement</a></div><div class="price-card featured reveal reveal-delay-2"><div class="price-badge">Le + populaire</div><div class="price-name">Standard</div><div class="price-amount">49€ <span>/ mois</span></div><p class="price-desc">L'essentiel pour gérer votre activité sereinement.</p><ul class="price-features"><li>Tout Découverte inclus</li><li>RDV illimités</li><li>Facturation intégrée</li><li>Rappels SMS + email</li><li>Fiches animaux complètes</li><li>Tableau de bord</li><li>Support prioritaire</li></ul><a href="#inscription-pro" class="btn-price btn-price-filled">Essai gratuit 7 jours</a></div><div class="price-card reveal reveal-delay-3"><div class="price-name">Premium</div><div class="price-amount">79€ <span>/ mois</span></div><p class="price-desc">Pour les structures multi-pros et ambitieuses.</p><ul class="price-features"><li>Tout Standard inclus</li><li>Mini-site personnalisé</li><li>Paiement en ligne</li><li>API & intégrations</li><li>Analyses de vos données</li><li>Account manager dédié</li></ul><a href="#inscription-pro" class="btn-price btn-price-outline">Essai gratuit 7 jours</a></div></div></div></section>
-    <section class="cta-section" id="inscription-pro"><div class="cta-inner"><div class="section-label reveal">🚀 Accès anticipé</div><h2 class="section-title reveal">Soyez parmi les premiers<br>à essayer Animly</h2><p class="section-sub reveal">Inscrivez-vous pour recevoir un accès prioritaire au lancement. Gratuit, sans engagement.</p><form class="cta-form reveal" id="signup-form-pro" action="https://formspree.io/f/xzdyzpel" method="POST"><input type="hidden" name="type" value="professionnel"><input type="email" name="email" placeholder="Votre adresse email professionnelle" required><button type="submit" class="btn-primary">S'inscrire →</button></form><p class="cta-note reveal">🔒 Pas de spam. On vous contacte uniquement pour le lancement.</p><div class="cta-success" id="success-msg-pro">🎉 Merci ! Vous êtes sur la liste. On vous contacte très vite.</div></div></section>
+    <section class="cta-section" id="inscription-pro"><div class="cta-inner"><div class="section-label reveal">🚀 Accès anticipé</div><h2 class="section-title reveal">Soyez parmi les premiers<br>à essayer Animly</h2><p class="section-sub reveal">Inscrivez-vous pour recevoir un accès prioritaire au lancement. Gratuit, sans engagement.</p><form class="cta-form reveal" id="signup-form-pro" action="https://formspree.io/f/xzdyzpel" method="POST"><input type="hidden" name="type" value="professionnel"><input type="text" name="_gotcha" style="display:none"><input type="email" name="email" placeholder="Votre adresse email professionnelle" required><button type="submit" class="btn-primary">S'inscrire →</button></form><p class="cta-note reveal">🔒 Pas de spam. On vous contacte uniquement pour le lancement.</p><div class="cta-success" id="success-msg-pro">🎉 Merci ! Vous êtes sur la liste. On vous contacte très vite.</div></div></section>
 </div>
 
 <!-- ==================== PARTICULIER ==================== -->
@@ -358,13 +370,14 @@
                 <div class="hero-badge"><div class="hero-badge-dot"></div>Lancement juin 2026 — 100% gratuit pour les particuliers</div>
                 <h1>Trouvez le professionnel <em>idéal</em> pour votre animal</h1>
                 <p class="hero-sub">Toiletteur, vétérinaire, éducateur, pet-sitter, ostéopathe… Tous les pros animaliers de votre ville, vérifiés et disponibles en un clic.</p>
-                <div class="search-bar-wrap">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Quel professionnel cherchez-vous ?">
-                        <select><option>📍 Ville</option><option>Lyon</option><option>Bordeaux</option><option>Nantes</option><option>Paris</option><option>Marseille</option><option>La Rochelle</option></select>
-                        <button class="search-btn">Rechercher</button>
-                    </div>
-                </div>
+                <form class="hero-signup-form" id="signup-form-hero-part" action="https://formspree.io/f/xwvabwyy" method="POST">
+                    <input type="hidden" name="type" value="particulier">
+                    <input type="text" name="_gotcha" style="display:none">
+                    <input type="email" name="email" placeholder="Votre adresse email" required>
+                    <button type="submit" class="btn-primary">Être prévenu →</button>
+                </form>
+                <div class="hero-signup-success" id="success-msg-hero-part">🎉 Merci ! Vous serez parmi les premiers informés.</div>
+                <p class="hero-signup-note">🔒 Gratuit, sans engagement. On vous contacte uniquement pour le lancement.</p>
             </div>
             <div class="hero-visual">
                 <div class="hero-card" style="padding:1.5rem;">
@@ -391,7 +404,7 @@
     </div></div></section>
     <section class="how-section" id="comment-ca-marche"><div class="section-inner"><div class="section-label reveal">🛤️ Simple comme bonjour</div><h2 class="section-title reveal">Comment ça marche ?</h2><p class="section-sub reveal">Trouver le bon professionnel pour votre animal n'a jamais été aussi simple.</p><div class="steps-grid"><div class="step-card reveal reveal-delay-1"><div class="step-number">1</div><h3>Cherchez</h3><p>Tapez le type de professionnel et votre ville. Parcourez les profils, les avis et les disponibilités.</p></div><div class="step-card reveal reveal-delay-2"><div class="step-number">2</div><h3>Comparez</h3><p>Consultez les tarifs, les spécialités, les photos et les avis d'autres propriétaires d'animaux.</p></div><div class="step-card reveal reveal-delay-3"><div class="step-number">3</div><h3>Réservez</h3><p>Prenez rendez-vous en ligne en 30 secondes. Confirmation instantanée et rappel avant le jour J.</p></div></div></div></section>
     <section class="advantages" id="avantages"><div class="section-inner"><div class="section-label reveal">💚 Pourquoi Animly ?</div><h2 class="section-title reveal">Le bien-être de votre animal,<br>en toute confiance</h2><p class="section-sub reveal">Animly vous garantit une expérience simple, fiable et transparente.</p><div class="adv-grid"><div class="adv-card reveal reveal-delay-1"><div class="adv-icon">✅</div><h3>Pros vérifiés</h3><p>Chaque professionnel est vérifié. Diplômes, assurances, avis — tout est transparent.</p></div><div class="adv-card reveal reveal-delay-2"><div class="adv-icon">⭐</div><h3>Avis authentiques</h3><p>Des avis laissés uniquement par des clients ayant réellement pris rendez-vous.</p></div><div class="adv-card reveal reveal-delay-3"><div class="adv-icon">🗓️</div><h3>Réservation instantanée</h3><p>Plus d'appels, plus d'attente. Réservez en ligne 24/7, même le dimanche soir.</p></div><div class="adv-card reveal reveal-delay-4"><div class="adv-icon">🔔</div><h3>Rappels automatiques</h3><p>SMS et email avant chaque rendez-vous. Vous n'oubliez plus jamais un vaccin.</p></div></div></div></section>
-    <section class="cta-section" id="inscription-part"><div class="cta-inner"><div class="section-label reveal">🐾 Rejoignez Animly</div><h2 class="section-title reveal">Soyez prévenu<br>dès le lancement</h2><p class="section-sub reveal">Inscrivez-vous pour être parmi les premiers à trouver et réserver les meilleurs pros animaliers de votre ville. Gratuit, sans engagement.</p><form class="cta-form reveal" id="signup-form-part" action="https://formspree.io/f/xzdyzpel" method="POST"><input type="hidden" name="type" value="particulier"><input type="email" name="email" placeholder="Votre adresse email" required><button type="submit" class="btn-primary">S'inscrire →</button></form><p class="cta-note reveal">🔒 Pas de spam. On vous contacte uniquement pour le lancement.</p><div class="cta-success" id="success-msg-part">🎉 Merci ! Vous serez parmi les premiers informés du lancement.</div></div></section>
+    <section class="cta-section" id="inscription-part"><div class="cta-inner"><div class="section-label reveal">🐾 Rejoignez Animly</div><h2 class="section-title reveal">Soyez prévenu<br>dès le lancement</h2><p class="section-sub reveal">Inscrivez-vous pour être parmi les premiers à trouver et réserver les meilleurs pros animaliers de votre ville. Gratuit, sans engagement.</p><form class="cta-form reveal" id="signup-form-part" action="https://formspree.io/f/xwvabwyy" method="POST"><input type="hidden" name="type" value="particulier"><input type="text" name="_gotcha" style="display:none"><input type="email" name="email" placeholder="Votre adresse email" required><button type="submit" class="btn-primary">S'inscrire →</button></form><p class="cta-note reveal">🔒 Pas de spam. On vous contacte uniquement pour le lancement.</p><div class="cta-success" id="success-msg-part">🎉 Merci ! Vous serez parmi les premiers informés du lancement.</div></div></section>
 </div>
 
 <!-- FOOTER -->
@@ -401,7 +414,7 @@
         <div class="footer-links">
             <div class="footer-col"><h4>Produit</h4><ul><li><a href="#fonctionnalites">Fonctionnalités</a></li><li><a href="#tarifs">Tarifs</a></li><li><a href="#inscription-pro">Accès anticipé</a></li></ul></div>
             <div class="footer-col"><h4>Ressources</h4><ul><li><a href="#">Blog</a></li><li><a href="#">FAQ</a></li><li><a href="mailto:contact@animly.co">Contact</a></li></ul></div>
-            <div class="footer-col"><h4>Légal</h4><ul><li><a href="#">Mentions légales</a></li><li><a href="#">CGU</a></li><li><a href="#">Politique de confidentialité</a></li></ul></div>
+            <div class="footer-col"><h4>Légal</h4><ul><li><a href="mentions-legales.html">Mentions légales</a></li><li><a href="cgu.html">CGU</a></li><li><a href="confidentialite.html">Politique de confidentialité</a></li></ul></div>
         </div>
     </div>
     <div class="footer-bottom"><span>© 2026 Animly. Tous droits réservés.</span><span>Fait avec 🐾 pour les pros animaliers</span></div>
